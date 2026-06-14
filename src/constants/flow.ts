@@ -4,9 +4,9 @@ export const NODE_WIDTH = 220;
 export const NODE_MIN_HEIGHT = 112;
 export const NODE_HEADER_HEIGHT = 32;
 
-export const CANVAS_WIDTH = 1200;
-export const CANVAS_HEIGHT = 800;
-export const CANVAS_PADDING = 48;
+export const CANVAS_WIDTH = 1400;
+export const CANVAS_HEIGHT = 900;
+export const CANVAS_PADDING = 60;
 
 export const CONNECTOR_STROKE_WIDTH = 2;
 export const CONNECTOR_HANDLE_SIZE = 10;

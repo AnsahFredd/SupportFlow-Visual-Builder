@@ -1,0 +1,347 @@
+/* Canvas, nodes, connectors */
+
+.canvas-viewport {
+  width: 100%;
+  min-height: 100%;
+  padding: var(--canvas-padding);
+  background:
+    radial-gradient(circle, var(--color-canvas-grid) 1px, transparent 1px) 0 0 /
+      20px 20px,
+    var(--color-canvas);
+}
+
+.canvas-board {
+  position: relative;
+  margin: 0;
+  background: transparent;
+}
+
+.flow-connectors {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.flow-connector__shadow {
+  stroke: rgba(91, 79, 245, 0.06);
+  stroke-linecap: round;
+}
+
+.flow-connector__line {
+  stroke: var(--color-connector);
+  stroke-linecap: round;
+}
+
+.flow-connector--active .flow-connector__line {
+  stroke: var(--color-connector-active);
+  stroke-width: 2.5;
+}
+
+.flow-connector__label-bg {
+  fill: #ffffff;
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.flow-connector__label {
+  fill: var(--color-text-soft);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.flow-connector--active .flow-connector__label {
+  fill: var(--color-primary-strong);
+}
+
+.flow-nodes-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.flow-node {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 200px;
+  padding: var(--space-4);
+  text-align: left;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-node);
+  overflow: visible;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.flow-node:hover {
+  box-shadow: var(--shadow-node-hover);
+}
+
+.flow-node--selected {
+  z-index: 3;
+  border-color: rgba(91, 79, 245, 0.45);
+  box-shadow: var(--shadow-node-selected);
+}
+
+.flow-node__glow {
+  display: none;
+}
+
+.flow-node__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.flow-node--start .flow-node__accent {
+  background: var(--color-start);
+}
+
+.flow-node--question .flow-node__accent {
+  background: var(--color-question);
+}
+
+.flow-node--end .flow-node__accent {
+  background: var(--color-end);
+}
+
+.flow-node__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: 2px;
+}
+
+.flow-node__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.flow-node--start .flow-node__icon {
+  color: #047857;
+  background: var(--color-start-soft);
+}
+
+.flow-node--question .flow-node__icon {
+  color: #1d4ed8;
+  background: var(--color-question-soft);
+}
+
+.flow-node--end .flow-node__icon {
+  color: #be123c;
+  background: var(--color-end-soft);
+}
+
+.flow-node__icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+.flow-node__type {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.flow-node__id {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-subtle);
+}
+
+.flow-node__text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.flow-node__options {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow-node__option-chip {
+  display: block;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-soft);
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Settings panel extras */
+
+.settings-panel__eyebrow {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.settings-panel__badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.settings-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+}
+
+.settings-badge--start {
+  color: #047857;
+  background: var(--color-start-soft);
+}
+
+.settings-badge--question {
+  color: #1d4ed8;
+  background: var(--color-question-soft);
+}
+
+.settings-badge--end {
+  color: #be123c;
+  background: var(--color-end-soft);
+}
+
+.settings-panel__node-id {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-subtle);
+}
+
+.field__label {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.field__hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-subtle);
+}
+
+.branch-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.branch-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 10px 12px;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.branch-list__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.branch-list__target {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary-strong);
+}
+
+.settings-panel__footer-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.settings-panel__empty {
+  display: grid;
+  place-content: center;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+}
+
+.settings-panel__empty-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-radius: var(--radius-md);
+}
+
+.settings-panel__empty-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.settings-panel__empty h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.settings-panel__empty p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.settings-panel--empty .settings-panel__header {
+  opacity: 0.72;
+}
