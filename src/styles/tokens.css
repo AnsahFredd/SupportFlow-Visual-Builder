@@ -1,0 +1,55 @@
+:root {
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+
+  --color-canvas: #f6f7f9;
+  --color-canvas-grid: #d9dee8;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f3f0ff;
+  --color-surface-muted: #f8f9fc;
+
+  --color-primary: #4f46e5;
+  --color-primary-strong: #4338ca;
+  --color-primary-soft: #ece9ff;
+  --color-start: #22c55e;
+  --color-question: #3b82f6;
+  --color-end: #ef4444;
+  --color-warning: #facc15;
+  --color-connector: #cbd5e1;
+  --color-connector-active: #4f46e5;
+
+  --color-text: #15141f;
+  --color-text-soft: #3f3d4d;
+  --color-muted: #747184;
+  --color-subtle: #9b98aa;
+  --color-border: #e3e0ec;
+  --color-border-strong: #c9c3df;
+  --color-danger: #dc2626;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  --shadow-node: 0 10px 28px rgba(79, 70, 229, 0.12);
+  --shadow-panel: 0 18px 60px rgba(25, 22, 38, 0.12);
+  --shadow-control: 0 8px 20px rgba(30, 28, 42, 0.1);
+
+  --sidebar-width: clamp(180px, 14vw, 220px);
+  --settings-width: clamp(280px, 22vw, 320px);
+  --topbar-height: 56px;
+  --canvas-min-width: 0;
+  --canvas-min-height: 0;
+}
