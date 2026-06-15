@@ -18,6 +18,8 @@ export type FlowNode = {
   text: string;
   position: FlowNodePosition;
   options: FlowOption[];
+  advancedLogic?: boolean;
+  condition?: string;
 };
 
 export type FlowMeta = {

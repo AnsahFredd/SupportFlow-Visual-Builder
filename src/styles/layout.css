@@ -170,32 +170,9 @@
   justify-self: end;
 }
 
-.topbar__preview-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 36px;
-  padding: 0 14px;
-  color: var(--color-primary-strong);
-  font-size: 14px;
-  font-weight: 600;
-  background: var(--color-primary-soft);
-  border: 1px solid rgba(91, 79, 245, 0.22);
-  border-radius: var(--radius-sm);
-  transition:
-    background 160ms ease,
-    border-color 160ms ease,
-    transform 160ms ease;
-}
-
 .topbar__preview-icon {
   width: 14px;
   height: 14px;
-}
-
-.topbar__preview-btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.72;
 }
 
 .icon-button,
@@ -245,6 +222,11 @@
   border: 1px solid var(--color-border);
 }
 
+.secondary-button:hover:not(:disabled) {
+  background: var(--color-surface-soft);
+  border-color: var(--color-border-strong);
+}
+
 .secondary-button:disabled {
   opacity: 0.55;
 }
@@ -267,25 +249,6 @@
 
 .sidebar::-webkit-scrollbar {
   display: none;
-}
-
-.sidebar__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: var(--space-10);
-  min-height: var(--space-10);
-  margin-bottom: var(--space-6);
-  color: var(--color-surface);
-  font-size: 14px;
-  font-weight: 500;
-  background: var(--color-primary);
-  border-radius: var(--radius-sm);
-}
-
-.sidebar__cta:hover {
-  background: var(--color-primary-strong);
 }
 
 .sidebar__hero {
@@ -783,4 +746,171 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--color-primary-strong);
+}
+
+/* Advanced Logic */
+.logic-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.logic-toggle__slider {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 24px;
+  padding: 0;
+  background: var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logic-toggle__slider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.logic-toggle__slider--on {
+  background: var(--color-primary);
+}
+
+.logic-toggle__slider--on::after {
+  transform: translateX(20px);
+}
+
+.logic-toggle__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.logic-condition-field {
+  width: 100%;
+  height: 38px;
+  padding: 0 var(--space-2);
+  color: var(--color-text);
+  font-size: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.logic-condition-field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(91, 79, 245, 0.12);
+}
+
+.chat-show-path-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin: 0 var(--space-6) var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary-strong);
+  background: var(--color-primary-soft);
+  border: 1px solid rgba(91, 79, 245, 0.22);
+  border-radius: var(--radius-sm);
+}
+
+.chat-show-path-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+/* Responsive */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  html,
+  body,
+  #root,
+  .app,
+  .builder-shell,
+  .preview-shell {
+    min-width: 0;
+  }
+
+  :root {
+    --sidebar-width: 200px;
+  }
+
+  .settings-panel {
+    width: 280px;
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 767px) {
+  .preview-body {
+    flex-direction: column;
+  }
+
+  .chat-panel {
+    flex: 1 1 auto;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .chat-show-path-btn {
+    display: inline-flex;
+  }
+
+  .path-panel {
+    display: none;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .path-panel--open-mobile {
+    display: flex;
+  }
+
+  .topbar {
+    gap: var(--space-2);
+    padding: 0 var(--space-3);
+  }
+
+  .topbar__center {
+    display: none;
+  }
+
+  .brand__meta {
+    display: none;
+  }
+
+  .preview-topbar {
+    flex-wrap: nowrap;
+    padding: 0 var(--space-3);
+  }
+
+  .preview-topbar__brand {
+    font-size: 14px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 0 var(--space-3);
+    font-size: 13px;
+  }
 }

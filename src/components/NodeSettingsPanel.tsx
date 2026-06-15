@@ -5,12 +5,18 @@ type NodeSettingsPanelProps = {
   selectedNode: FlowNode | null;
   onClose: () => void;
   onUpdateText: (nodeId: string, text: string) => void;
+  onUpdateAdvancedLogic: (
+    nodeId: string,
+    advancedLogic: boolean,
+    condition: string,
+  ) => void;
 };
 
 export function NodeSettingsPanel({
   selectedNode,
   onClose,
   onUpdateText,
+  onUpdateAdvancedLogic,
 }: NodeSettingsPanelProps) {
   return (
     <aside
@@ -90,6 +96,63 @@ export function NodeSettingsPanel({
                 </ul>
               </div>
             )}
+
+            <div className="field">
+              <span className="field__label">Advanced Logic</span>
+              <div className="logic-toggle">
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={Boolean(selectedNode.advancedLogic)}
+                  aria-label="Enable Conditional Logic"
+                  className={[
+                    'logic-toggle__slider',
+                    selectedNode.advancedLogic
+                      ? 'logic-toggle__slider--on'
+                      : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  onClick={() =>
+                    onUpdateAdvancedLogic(
+                      selectedNode.id,
+                      !selectedNode.advancedLogic,
+                      selectedNode.condition ?? '',
+                    )
+                  }
+                />
+                <span className="logic-toggle__label">
+                  Enable Conditional Logic
+                </span>
+              </div>
+
+              {selectedNode.advancedLogic && (
+                <>
+                  <label htmlFor="node-condition">
+                    Only show this node if previous answer contains:
+                  </label>
+                  <input
+                    id="node-condition"
+                    className="logic-condition-field"
+                    type="text"
+                    value={selectedNode.condition ?? ''}
+                    onChange={(event) =>
+                      onUpdateAdvancedLogic(
+                        selectedNode.id,
+                        true,
+                        event.target.value,
+                      )
+                    }
+                    placeholder="e.g. Internet, Billing"
+                  />
+                </>
+              )}
+
+              <p className="field__hint">
+                Show this node only if a specific condition is met from the
+                previous answer
+              </p>
+            </div>
           </div>
 
           <div className="settings-panel__footer">

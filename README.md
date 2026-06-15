@@ -1,111 +1,39 @@
-# SupportFlow-Visual-Builder
+# SupportFlow Visual Builder
 
-This challenge is designed to test your ability to bridge Computer Science fundamentals with Modern Frontend Engineering.
+This is a visual editor for customer-support chatbot flows. The brief was to replace a spreadsheet-based config with something you can actually see: the conversation as a flowchart, editable in place, with a way to test-drive the bot end to end.
 
-## 1. Business Scenario & Context
+I built the flowchart rendering and the connector lines by hand (no graph libraries), and kept all state in memory since there's no backend.
 
-**Client:** SupportFlow AI  
-**Industry:** Customer Support Automation (Chatbots)
+## What it does
 
-**The Problem:** SupportFlow helps companies build automated "Help Bots" (e.g., "Press 1 for Billing, 2 for Tech Support"). Currently, their configuration is done via a messy Excel spreadsheet. It is error-prone, hard to visualize, and frustrating for non-technical managers.
+- **Flow canvas** — renders each node from `flow_data.json` as a card placed at its x/y coordinates, with SVG lines connecting parents to children.
+- **Node editor** — click a node to edit its question text; the canvas updates as you type.
+- **Preview mode** — steps through the flow as a chat, the way a customer would see it. A side panel logs the path taken and the answer chosen at each step. When you hit an end node you can restart.
+- **Advanced logic** — my wildcard feature (see below).
 
-**Your Role:** You are the new Frontend Engineer. The Product Manager wants a **Visual Decision Tree Editor** where users can see their conversation flow as a flowchart, edit the questions in real-time, and "test drive" the bot instantly.
+## The wildcard feature
 
----
+I added an **Advanced Logic** toggle on each node. When it's on, you can set a keyword, and the node only shows in preview if the user's previous answer contains that keyword (case-insensitive).
 
-## 2. The Assignment Stages
+I picked this because the people configuring these bots are support managers, not developers. Letting them gate a node on what the customer actually said means they can build branching, context-aware flows themselves instead of filing a ticket for an engineer to hardcode it.
 
-This is a **hybrid design/engineering challenge**. You are expected to demonstrate competence in both visual design logic and complex DOM manipulation.
+## Stack
 
-### Phase 1: The Design System
+React + TypeScript, built with Vite. Styling is plain CSS — no UI frameworks.
 
-**Before writing code, you must design the visual language of the tool.**
+## Design file
 
-- **Deliverable:** A link to your design file (Figma, Penpot, or Sketch) or a PDF export of your design frames.
-- **Requirement:** Your design file must include a dedicated **"Design System" page** that defines:
-  - **Canvas**
-  - **Node Cards**
-  - **Connectors**
-  - **Color Semantics**
+[Figma Design Link] — https://www.figma.com/design/B8DqfH4XPUfmq31x6CdpdU/SupportFlow-Visual-Builder?node-id=1-3&t=0GaX999kdlj3wWcG-1
 
-### Phase 2: The Implementation
+## Running it
 
-**Build the "Flow Builder" using your design system.**
+```bash
+npm install
+npm run dev
+```
 
-- **Constraint 1 (Critical):** You **cannot** use Flowchart/Graph libraries like `react-flow`, `jsPlumb`, or `mermaid.js`. You must build the node rendering and line connection logic yourself to prove you understand DOM coordinates and SVG/Canvas drawing.
-- **Constraint 2:** Do not use component libraries like Material UI or Bootstrap. (Tailwind is allowed only if you use it to build custom components).
+Vite prints the local URL (usually http://localhost:5173).
 
----
+## Deployment
 
-## 3. User Stories & Acceptance Criteria
-
-### Core Features (Required)
-
-#### Story 1: The Visual Graph
-
-> "As a user, I want to see my conversation logic as a connected flowchart, not a list."
-
-- **AC 1:** The app renders "Nodes" (questions) based on the provided JSON data.
-- **AC 2:** The Nodes are positioned absolutely on the canvas (using the x/y coordinates provided in the JSON).
-- **AC 3:** Visual lines (SVG or HTML Canvas) connect a Parent Node to its Child Nodes based on the flow logic.
-
-#### Story 2: The Editor
-
-> "As a user, I need to update the text when our support policies change."
-
-- **AC 1:** Clicking a Node opens an "Edit Panel" or turns the card into an editable form.
-- **AC 2:** Users can edit the "Question Text" and the changes reflect immediately on the canvas.
-- **AC 3:** (Constraint) You do not need to save changes to a permanent database. Managing local state (in-memory) is sufficient.
-
-#### Story 3: The "Preview" Mode (The Runner)
-
-> "As a manager, I want to test the bot experience as if I were a real customer."
-
-- **AC 1:** A "Play" button toggles the UI from "Editor View" (Flowchart) to "Preview Mode" (Chat Interface).
-- **AC 2:** In Preview Mode, the app displays the Start Node's question.
-- **AC 3:** When the user selects an answer, the app traverses the graph to show the next node.
-- **AC 4:** Show a "Restart" button when a leaf node (end of conversation) is reached.
-
-### The "Wildcard" Feature (Required)
-
-#### Story 4: The Innovation Clause
-
-> "As a developer, I want to add one feature that makes this tool indispensable."
-
-- **Task:** Identify a missing feature that improves the _Editor_ experience.
-- **AC 1:** Implement **one** additional feature of your choice.
-- **AC 2:** In your README, explain _why_ you chose this feature and how it adds value to the business.
-
----
-
-## 4. Technical Requirements
-
-- **Data:** Use the `flow_data.json` file provided in this repo.
-- **Tech Stack:** React, Vue, Svelte, or Vanilla JS.
-
----
-
-## 5. Submission Instructions
-
-1.  **Fork** this repository.
-2.  Complete the code in your fork.
-3.  **Update the README:**
-    - **Delete** all the instructions in this file (the text you are reading now).
-    - **Replace** them with your own documentation.
-    - _Note: Do not append your docs to the end. The final README should look like a professional project documentation, not a homework assignment._
-4.  Submit your repo link via the [online](https://forms.office.com/e/G6vaRQxWYM) form.
-
-### ⚠️ CRITICAL: Pre-Submission Checklist
-
-**STOP and review your work.** To be eligible for the Solution Defense interview, your submission **MUST** pass the following "Gatekeeper" checks.
-
-If any of the following are incorrect, your submission will be flagged as incomplete and you will **NOT** be invited for an interview.
-
-1.  **Public Repository:** Is your GitHub repository set to **Public**? (Private links will be auto-rejected).
-2.  **Audit-Ready History:** Does your Git commit history show your progress over time? (Repositories with a single "Initial Commit" or "Upload files" containing the entire project will be **rejected as unverifiable**).
-3.  **Working Deployment:** Have you tested your live link in an **Incognito/Private** window to ensure it loads without errors?
-4.  **No Restricted Libraries:** Did you build your own components? (Submissions using **Bootstrap, Material UI, or Chakra UI** will be disqualified).
-5.  **Design File Access:** Is your Figma/Penpot link included and set to **"Anyone with the link can view"**?
-6.  **Documentation:** Have you deleted the original assignment text from the `README.md` and replaced it with your own project documentation?
-
-> **By submitting your work, you acknowledge that failure to meet these criteria effectively ends your application process.**
+Live: https://support-flow-visual-builder-weld.vercel.app/

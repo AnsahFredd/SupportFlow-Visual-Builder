@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import flowData from '../flow_data.json';
 import { FlowCanvas } from './components/FlowCanvas';
 import { NodeSettingsPanel } from './components/NodeSettingsPanel';
+import { PreviewMode } from './components/PreviewMode';
 import type { FlowData, FlowNode } from './types/flow';
 import { getEdgesFromNodes, getNodeById } from './utils/flowGraph';
 
@@ -10,6 +11,7 @@ const initialFlow = flowData as FlowData;
 function App() {
   const [nodes, setNodes] = useState<FlowNode[]>(initialFlow.nodes);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
 
   const edges = useMemo(() => getEdgesFromNodes(nodes), [nodes]);
   const selectedNode = useMemo(
@@ -32,6 +34,26 @@ function App() {
       ),
     );
   }, []);
+
+  const handleUpdateAdvancedLogic = useCallback(
+    (nodeId: string, advancedLogic: boolean, condition: string) => {
+      setNodes((currentNodes) =>
+        currentNodes.map((node) =>
+          node.id === nodeId ? { ...node, advancedLogic, condition } : node,
+        ),
+      );
+    },
+    [],
+  );
+
+  if (isPreviewMode) {
+    return (
+      <PreviewMode
+        nodes={nodes}
+        onBackToEditor={() => setIsPreviewMode(false)}
+      />
+    );
+  }
 
   return (
     <div className="app">
@@ -64,10 +86,11 @@ function App() {
 
           <div className="topbar__actions">
             <button
-              className="topbar__preview-btn"
+              className="primary-button"
               type="button"
-              disabled
-              aria-label="Preview workflow (coming soon)"
+              onClick={() => setIsPreviewMode(true)}
+              aria-label="Preview workflow"
+              style={{ gap: 'var(--space-2)' }}
             >
               <svg
                 viewBox="0 0 16 16"
@@ -83,10 +106,6 @@ function App() {
 
         <div className="builder-columns">
           <aside className="sidebar" aria-label="Workflow overview">
-            <button className="sidebar__cta" type="button">
-              + New Workflow
-            </button>
-
             <section className="sidebar__hero">
               <h2>Flow Overview</h2>
               <p>
@@ -151,6 +170,7 @@ function App() {
             selectedNode={selectedNode}
             onClose={handleClosePanel}
             onUpdateText={handleUpdateText}
+            onUpdateAdvancedLogic={handleUpdateAdvancedLogic}
           />
         </div>
       </main>
