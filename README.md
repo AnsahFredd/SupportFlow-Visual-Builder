@@ -23,7 +23,7 @@ React + TypeScript, built with Vite. Styling is plain CSS — no UI frameworks.
 
 ## Design file
 
-[Figma Design Link] — https://www.figma.com/design/B8DqfH4XPUfmq31x6CdpdU/SupportFlow-Visual-Builder?node-id=1-3&t=0GaX999kdlj3wWcG-1
+https://www.figma.com/design/B8DqfH4XPUfmq31x6CdpdU/SupportFlow-Visual-Builder?node-id=1-3&t=0GaX999kdlj3wWcG-1
 
 ## Running it
 
