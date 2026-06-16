@@ -147,7 +147,7 @@ function App() {
               <ul className="tip-list">
                 <li>Click a node to edit its question text.</li>
                 <li>Follow connector labels to trace customer paths.</li>
-                <li>Preview mode coming soon.</li>
+                <li>Click Preview to test the bot.</li>
               </ul>
             </section>
           </aside>
